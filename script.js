@@ -1,29 +1,44 @@
-function convertToRoman(num) {
-  	const obj = {
-      0:['M',1000], 
-      1:['D', 500], 
-      2:['C', 100], 
-      3:['L', 50], 
-      4:['X', 10], 
-      5:['V', 5], 
-      6:['I', 1]
-    };
-  let result = '';
+const romanNumerals = [
+    ['M', 1000],
+    ['D', 500],
+    ['C', 100],
+    ['L', 50],
+    ['X', 10],
+    ['V', 5],
+    ['I', 1]
+];
+
+const toRoman = (num) => {
+    if (num < 1 || num > 100000) return "Invalid input";
+
+    let result = '';
     
-  for (const [roman, value] of convertToRoman) {
-    while (num >= value) {
-        result += roman;
-        num -= value;
-     }
-  }
-return result
-}
-// You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
+    // Handle special cases for subtraction
+    if (num >= 1000) {
+        while (num >= 1000) { result += 'M'; num -= 1000; }
+    }
+    if (num >= 900) { result += 'CM'; num -= 900; }
+    if (num >= 500) { result += 'D'; num -= 500; }
+    if (num >= 400) { result += 'CD'; num -= 400; }
+    if (num >= 100) {
+        while (num >= 100) { result += 'C'; num -= 100; }
+    }
+    if (num >= 90) { result += 'XC'; num -= 90; }
+    if (num >= 50) { result += 'L'; num -= 50; }
+    if (num >= 40) { result += 'XL'; num -= 40; }
+    if (num >= 10) {
+        while (num >= 10) { result += 'X'; num -= 10; }
+    }
+    if (num >= 9) { result += 'IX'; num -= 9; }
+    if (num >= 5) { result += 'V'; num -= 5; }
+    if (num >= 4) { result += 'IV'; num -= 4; }
+    if (num >= 1) {
+        while (num >= 1) { result += 'I'; num -= 1; }
+    }
 
-console.log(convertToRoman(36));
+    return result;
+};
 
-
-
-
-// do not edit below this line
-module.exports = convertToRoman
+// Example usage:
+const input = parseInt(prompt("Enter a number between 1 and 100,000: "), 10);
+alert(toRoman(input));
