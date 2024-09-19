@@ -38,7 +38,6 @@ const toRoman = (num) => {
 
     return result;
 };
-
 // Example usage:
 const input = parseInt(prompt("Enter a number between 1 and 100,000: "), 10);
 alert(toRoman(input));
